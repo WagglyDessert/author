@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&family=Itim&family=Kalnia+Glaze&family=Kranky&family=Poiret+One&family=Megrim&family=Train+One&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <title>Novelist</title>
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            line-height: 1.2;
+            overflow-x: hidden; /* Disable horizontal scrolling */
+            overflow-y: auto;
+        }
+
+        /* Header Section */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            color: black;
+            padding: 0px 0;
+            z-index: 1000;
+            text-align: center;
+            width: 100%%;
+        }
+
+        .henny-penny-regular {
+          font-family: "Henny Penny", system-ui;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+        .itim-regular {
+          font-family: "Itim", cursive;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+        .kalnia-glaze {
+          font-family: "Kalnia Glaze", serif;
+          font-optical-sizing: auto;
+          font-weight: 400;
+          font-style: normal;
+          font-variation-settings:
+            "wdth" 100;
+        }
+
+        .megrim-regular {
+          font-family: "Megrim", system-ui;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+        .zen-tokyo-zoo-regular {
+          font-family: "Zen Tokyo Zoo", system-ui;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+        .kranky-regular {
+          font-family: "Kranky", serif;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+        .train-one-regular {
+          font-family: "Train One", system-ui;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+        .logo {
+          max-width: 100px;
+          max-height: 100x;
+          padding: 52px 0px;
+          margin: 0 auto;
+          position: relative;
+        }
+
+        .logo img {
+            width: 100px; /* Same width for both JPG and GIF */
+            height: 100px; /* Same height for both JPG and GIF */
+            display: block;
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s ease-in-out; /* Smooth transition */
+        }
+
+        /* Initially, hide the GIF and show the JPG */
+        .logo img.gif {
+            width: 200px; /* Same width for both JPG and GIF */
+            height: 200px;
+            opacity: 0;
+            top: -65px;            /* Ensure the GIF is in the same position as the JPG */
+            left: -55px; 
+        }
+
+        /* On hover, show the GIF and hide the JPG */
+        .logo:hover img.jpg {
+            opacity: 0;
+        }
+
+        .logo:hover img.gif {
+            opacity: 1;
+        }
+
+        .name {
+            font-size: 40px;
+            font-weight: bold;
+            font-family: "Henny Penny", system-ui;
+            padding: 5px 10px;
+
+        }
+
+        .poiret-one-regular {
+          font-family: "Poiret One", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+
+        /* Navigation Tabs */
+        .nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 5px 0;
+            font-family: "Poiret One", sans-serif;
+            font-weight: 100;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 6px 10px;
+            font-size: 24px;
+            transition: background-color 0.3s;
+            font-weight: 100;
+            margin-right: 40px;
+            margin-left: 40px;
+        }
+
+        .nav a:hover {
+            background-color: #555;
+        }
+
+        /* Main Content */
+        .content {
+            padding-top: 0px;
+            /* Removed margin-top; section margins will handle spacing */
+        }
+
+        section {
+          padding: 50px;
+          margin-bottom: 20px;
+          padding-top: 300px;
+        }
+
+        section h2 {
+            margin-bottom: 20px;
+            text-shadow: none;
+            font-family: "Poiret One", sans-serif;
+        }
+
+        hr {
+            border: 2;
+            border-top: 2px solid gray;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        #home {
+          background-image: url('<%= asset_path("bakery_copy.png") %>');
+          background-size: cover;
+          background-position: center center; /* Ensure the image is centered */
+          height: 60vh;  /* Full viewport height */
+          color: white;
+          background-color: black; /* Light grey background */
+        }
+
+        #books {
+          color: black;
+          font-family: "Kranky", Serif;
+          font-size: clamp(16px, 2vw, 28px);
+        }
+        
+        #about {
+          color: black;
+          font-family: "Kranky", Serif;
+          font-size: clamp(16px, 2vw, 28px);
+          margin-top: -300px;
+        }
+
+        #contact {
+          color: blue;
+          font-size: clamp(16px, 2vw, 28px);
+          margin-top: -300px;
+          margin-bottom: -400px;
+        }
+
+        .small-image {
+          max-width: 200px;
+          height: auto;
+          float: right;
+          margin: 20px;
+        }
+
+        .small-image-2 {
+          max-width: 200px;
+          height: auto;
+          float: left;
+          margin: 20px;
+        }
+
+        .contact-form {
+          margin: 0px 200px;
+          background-color: #f9fbff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          text-align: center;
+        }
+
+        .contact-form h2 {
+          font-family: "Poiret One", sans-serif;
+          color: #1e1e58;
+          margin-bottom: 20px;
+        }
+
+        .form-row {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 15px;
+        }
+
+        .input {
+          width: 48%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f0f4ff;
+          font-size: 16px;
+          font-family: "Poiret One", sans-serif;
+        }
+
+        .input.wide-input {
+          width: 100%%;
+        }
+
+        .textarea {
+          height: 80px;
+          resize: none;
+        }
+
+        .submit-button {
+          background-color: #1e1e58;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+
+        .submit-button:hover {
+          background-color: #3145a1;
+        }
+
+        .success-message {
+          font-family: Arial, sans-serif;
+          color: #27ae60;
+          margin-top: 10px;
+          font-size: 14px;
+        }
+
+      .flash {
+        padding: 10px;
+        margin-top: 20px;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+
+      .flash.notice {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .flash.alert {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .error-message {
+        color: red;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+    </style>
+</head>
+
+<body>
+    <!-- Header Section with Logo and Navigation -->
+  <div class="header">
+    <div class="logo">
+      <%= image_tag 'hank.jpg', alt: 'logo', class: 'logo-img jpg' %>
+      <%= image_tag 'hank.gif', alt: 'logo animated', class: 'logo-img gif' %>
+    </div>
+    <div class="name">
+        Nathan Lee Trautenberg
+    </div>
+    <div class="nav">
+      <a href="#home">Home</a>
+      <a href="#books">Books</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <!-- Main Content Sections -->
+  <div class="content">
+    <section id="home">
+        <p style="margin-top: 500px; color: black; font-size: 12px; background-color: rgba(235, 245, 245, 0.4); display: inline-block;">
+        Image generated by ImagineAI</p>
+        <h2 style="margin-top: 50px; font-style: italic; color: black; font-size: clamp(16px, 2vw, 28px); background-color: rgba(229, 245, 245, 0.2); padding: 10px">
+        He could see the spaceship vividly, and the twelve gray aliens walking single file towards the bakery.
+        The door opened, and their smiling faces and bright souls paraded on in.
+        Rosaline had a mop on stand-by for the inevitable goo puddles, those little pools of happiness.
+        </h2>
+        <h2 style="color: black; font-size: clamp(16px, 2vw, 28px); text-shadow: 2px 2px 4px red; padding: 10px;">- BAKER'S DOZEN by Nathan Lee Trautenberg</h2>
+    </section>
+    <section id="books">
+        <hr>
+        <h2>Books</h2>
+        <%= image_tag 'bd_cover.png', class: 'small-image' %>
+        <p>I am currently submitting my first manuscript, BAKER'S DOZEN, to literary agents.
+        Baker’s Dozen tells the story of Eugene Schumaker, a kind-hearted bug-lover who gets caught up in a destructive cycle of greed and guilt when he unexpectedly becomes the CEO of a multibillion-dollar train and oil business, but with the help of friends and pastry-loving aliens, is reminded of his life’s true purpose.
+        It is a humorous satire about a man who struggles to do what's right for himself, even if it means letting others down.
+        <br><br>
+        BAKER'S DOZEN's target audience are adults who enjoy dark humor, satire, and hints of magical realism.
+        The story is told in third person limited from multiple characters' points of view, and although a satire at heart, reads like an espionage thriller.
+        The books that inspired my writing are <i>Sirens of Titan</i>, <i>Catch-22</i>, and <i>The Masquerade of the Red Death Trilogy</i>.
+        <br><br>
+        While BAKER'S DOZEN is being shopped, I'm currently working on my next novel, a two-book fantasy about time-traveling dragons.
+        I'm also brainstorming the scripts for a comedy series about high school teachers (based on true experiences), as well as a cartoon/ anime about a widower General who no longer wants to fight in the war and only wants to go home to his Grandma and his dog.
+        </p>
+    </section>
+    <section id="about">
+        <hr>
+        <h2>About</h2>
+        <%= image_tag 'wp.jpg', class: 'small-image-2' %>
+        <p>I began writing my first novel at the age of 23 when I was sitting at a cubicle at work, bored out of my mind.
+          A whole bunch of ideas flooded my brain, and I tried frantically to write them all down.
+          Once I had collected them all neatly on a stack of Post-Its, I went a step further and followed one of the ideas as far as it would take me, and it led me on a 91,000 word journey known as BAKER'S DOZEN.
+          I'm 32 now, so it took me the better part of eight years to write and edit the thing, and I learned tons of techniques and rules along the way.
+          <br><br>
+          Boredom is a wonderful thing-- it is the impetus for creativity.
+          Dunbar might have been on to something in that hospital with Yossarian...
+          <br><br>
+          I didn't realize I was going to write a novel, it just sort of happened.
+          And now that I've tapped into the wellspring of my literary imagination, I've also penned the plots to two more books and two series.
+          I need more time in the day to write!
+          <br><br>
+          I didn't study creative writing in school, but rather philosophy and science. 
+          My propensity for these subjects bleeds through my pen and colors my writing.
+          Although I write speculative fiction, the themes in my stories are forever pertinent to real life.
+          Sometimes the best answers to philosophical questions live within a wonderful tale of whimsy.
+          <br><br>
+          Of course, that assumes there are answers to fantastic questions such as, "what the heck am I doing here?"
+          Maybe it can be answered with a simple shrug, or maybe there is no answer, or maybe it takes a fun journey to figure it out!
+          <br><br>
+          When I'm not writing I enjoy working out, surfing, skiing, playing tennis and soccer.
+          I'm a big Avs fan.
+          I also like to watch football, and have two teams--the Broncos and Eagles.
+          Like most NFL fans, I always root for the Cowboys to lose.
+          I also enjoy cooking, spending time with my girlfriend, and petting Hank the Tank (featured at the top of this webpage).
+          You can try petting him too with your cursor; even though he's eighteen years old, he still moves around quite a bit!
+        </p>
+    </section>
+    <section id="contact">
+        <hr>
+        <h2>Contact</h2>
+        <p style="color: blue; font-family: 'Poiret One', sans-serif; font-size: 24px; display: inline-block;">Get in Touch</p>
+
+        <% if flash[:alert] %>
+          <div class="flash alert" style="color: red; margin-top: 10px;">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+        
+        <%= form_with(model: @contact, url: submit_contact_path, method: :post, class: 'form', html: { data: { turbo: false } }, id: 'contact-form') do |f| %>
+          <div class="form-row">
+          <%= f.text_field :first_name, placeholder: "First Name", class: "input" %>
+          <%= f.text_field :last_name, placeholder: "Last Name", class: "input" %>
+          <% if @contact.errors[:first_name].any? %>
+            <div class="error-message"><%= @contact.errors[:first_name].join(", ") %></div>
+          <% end %>
+          <% if @contact.errors[:last_name].any? %>
+            <div class="error-message"><%= @contact.errors[:last_name].join(", ") %></div>
+          <% end %>
+        </div>
+        <div class="form-row">
+          <%= f.email_field :email, placeholder: "Email", class: "input" %>
+        <% if @contact.errors[:email].any? %>
+          <div class="error-message"><%= @contact.errors[:email].join(", ") %></div>
+        <% end %>
+      </div>
+        <div class="form-row">
+          <%= f.text_area :message, placeholder: "Type your message here", class: "input textarea" %>
+        <% if @contact.errors[:message].any? %>
+          <div class="error-message"><%= @contact.errors[:message].join(", ") %></div>
+        <% end %>
+      </div>
+        <div class="form-row">
+          <%= f.submit "Submit", class: "submit-button" %>
+        </div>
+      <% end %>
+      <% if flash[:notice] %>
+      <div class="flash notice" style="color: green; margin-top: 10px;">
+        <%= flash[:notice] %>
+      </div>
+      <% end %>
+      <p style="color: black; font-family: 'Kalnia Glaze', serif; font-size: 16px; display: inline-block; width: 100%; text-align: center;">
+        Website created by Nathan Lee Trautenberg using Ruby on Rails.
+      </p>
+    </section>
+  </div>
+</body>
+</html>
