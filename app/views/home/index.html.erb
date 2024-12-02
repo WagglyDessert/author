@@ -402,9 +402,15 @@
         <p style="color: blue; font-family: 'Poiret One', sans-serif; font-size: 24px; display: inline-block;">Get in Touch</p>
 
         <% if flash[:alert] %>
-          <div class="flash alert" style="color: red; margin-top: 10px;">
+          <div class="flash alert" style="color: red; margin-bottom: 10px;">
             <%= flash[:alert] %>
           </div>
+        <% end %>
+
+        <% if flash[:notice] %>
+        <div class="flash notice" style="color: green; margin-bottom: 10px;">
+          <%= flash[:notice] %>
+        </div>
         <% end %>
         
         <%= form_with(model: @contact, url: submit_contact_path, method: :post, class: 'form', html: { data: { turbo: false } }, id: 'contact-form') do |f| %>
@@ -434,11 +440,7 @@
           <%= f.submit "Submit", class: "submit-button" %>
         </div>
       <% end %>
-      <% if flash[:notice] %>
-      <div class="flash notice" style="color: green; margin-top: 10px;">
-        <%= flash[:notice] %>
-      </div>
-      <% end %>
+      
       <p style="color: black; font-family: 'Kalnia Glaze', serif; font-size: 16px; display: inline-block; width: 100%; text-align: center;">
         Website created by Nathan Lee Trautenberg using Ruby on Rails.
       </p>
