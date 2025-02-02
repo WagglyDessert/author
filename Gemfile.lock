@@ -200,6 +200,7 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
+    ruby_http_client (3.5.5)
     rubyzip (2.3.2)
     selenium-webdriver (4.27.0)
       base64 (~> 0.2)
@@ -207,6 +208,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sendgrid-ruby (6.7.0)
+      ruby_http_client (~> 3.4)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -255,6 +258,7 @@ DEPENDENCIES
   rails (~> 7.0.8, >= 7.0.8.6)
   rspec-rails
   selenium-webdriver
+  sendgrid-ruby
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
