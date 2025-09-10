@@ -451,38 +451,73 @@
         </div>
         <% end %>
         
-        <%= form_with(model: @contact, url: submit_contact_path, method: :post, class: 'form', html: { data: { turbo: false } }, id: 'contact-form') do |f| %>
-          <div class="form-row">
-          <%= f.text_field :first_name, placeholder: "First Name", class: "input" %>
-          <%= f.text_field :last_name, placeholder: "Last Name", class: "input" %>
-          <% if @contact.errors[:first_name].any? %>
-            <div class="error-message"><%= @contact.errors[:first_name].join(", ") %></div>
-          <% end %>
-          <% if @contact.errors[:last_name].any? %>
-            <div class="error-message"><%= @contact.errors[:last_name].join(", ") %></div>
-          <% end %>
+      <form action="https://api.web3forms.com/submit" method="POST" class="form" id="contact-form">
+        <input type="hidden" name="access_key" value="698564ea-9ed4-4a5e-9b65-976ec7e5826e">
+
+        <div class="form-row">
+          <input type="text" name="first_name" placeholder="First Name" class="input" required>
+          <input type="text" name="last_name" placeholder="Last Name" class="input" required>
         </div>
+
         <div class="form-row">
-          <%= f.email_field :email, placeholder: "Email", class: "input" %>
-        <% if @contact.errors[:email].any? %>
-          <div class="error-message"><%= @contact.errors[:email].join(", ") %></div>
-        <% end %>
-      </div>
-        <div class="form-row">
-          <%= f.text_area :message, placeholder: "Type your message here", class: "input textarea" %>
-        <% if @contact.errors[:message].any? %>
-          <div class="error-message"><%= @contact.errors[:message].join(", ") %></div>
-        <% end %>
-      </div>
-        <div class="form-row">
-          <%= f.submit "Submit", class: "submit-button" %>
+          <input type="email" name="email" placeholder="Email" class="input" required>
         </div>
-      <% end %>
+
+        <div class="form-row">
+          <textarea name="message" placeholder="Type your message here" class="input textarea" required></textarea>
+        </div>
+
+        <div class="h-captcha" data-captcha="true"></div>
+
+        <div class="form-row">
+          <button type="submit" class="submit-button">Submit</button>
+        </div>
+      </form>
       
       <p style="color: black; font-family: 'Kalnia Glaze', serif; font-size: 16px; display: inline-block; width: 100%; text-align: center;">
         Website created by Nathan Lee Trautenberg using Ruby on Rails.
       </p>
     </section>
   </div>
+
+  <script src="https://web3forms.com/client/script.js" async defer>
+  </script>
+  
+  <script>
+  document.getElementById("contact-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const status = document.createElement("div");
+    status.id = "form-status";
+    status.style.marginTop = "15px";
+
+    // Remove old status messages if any
+    const oldStatus = document.getElementById("form-status");
+    if (oldStatus) oldStatus.remove();
+
+    form.appendChild(status);
+
+    status.innerHTML = "Sending...";
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: new FormData(form),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        status.innerHTML = `<span style="color: green;">✅ Thank you! Your message has been sent.</span>`;
+        form.reset();
+      } else {
+        status.innerHTML = `<span style="color: red;">❌ Error: ${result.message || "Something went wrong."}</span>`;
+      }
+    } catch (error) {
+      status.innerHTML = `<span style="color: red;">❌ Error: ${error.message}</span>`;
+    }
+  });
+</script>
 </body>
 </html>

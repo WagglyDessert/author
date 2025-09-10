@@ -6,7 +6,6 @@ class HomeController < ApplicationController
   def submit_contact
     @contact = Contact.new(contact_params)
 
-    # Instead of saving to the database, we'll send the email directly
     if send_contact_email(@contact)
       flash[:notice] = "Your message has been submitted. Thank you!"
       redirect_to root_path(anchor: 'contact')
