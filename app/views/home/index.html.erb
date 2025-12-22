@@ -391,31 +391,6 @@
           min-height: 100px;
         }
 
-        .books-nav {
-          display: flex;          /* horizontal layout */
-          gap: 1rem;              /* space between tabs */
-          border-bottom: 2px solid #ccc;
-          padding: 0.5rem 0;
-          background-color: #f9f9f9;
-          position: sticky;       /* optional sticky */
-          top: 0;
-          z-index: 10;
-        }
-
-        .book-tab {
-          padding: 0.5rem 1rem;
-          cursor: pointer;
-          border: none;
-          background-color: #e2e8f0;
-          border-radius: 6px 6px 0 0; /* top-rounded tabs */
-          font-weight: bold;
-        }
-
-        .book-tab.active {
-          background-color: #60a5fa;
-          color: white;
-        }
-
     </style>
 </head>
 
@@ -451,34 +426,10 @@
         <hr>
         <h2>Books</h2>
 
-        <div class="books-section">
-  <nav class="books-nav">
-    <button class="book-tab active" data-book="dogweed">Dogweed</button>
-    <button class="book-tab" data-book="bakers-dozen">Baker's Dozen</button>
-    <button class="book-tab" data-book="another-book">Another Book</button>
-  </nav>
-
-  <div class="book-content">
-    <div class="book-panel" id="dogweed">
-      <h2>Dogweed</h2>
-      <p>Description goes here.</p>
-    </div>
-
-    <div class="book-panel hidden" id="bakers-dozen">
-      <h2>Baker's Dozen</h2>
-      <p>Description goes here.</p>
-    </div>
-
-    <div class="book-panel hidden" id="another-book">
-      <h2>Another Book</h2>
-      <p>Description goes here.</p>
-    </div>
-  </div>
-</div>
-        <details open class="book-box">
-        <summary><strong>BAKER'S DOZEN</strong>
+        <%#<details open class="book-box">
+        <summary><strong>BAKER'S DOZEN</strong>%>
         <%= image_tag 'BDcoverEli.jpg', class: 'small-image' %>
-        </summary>
+        <%#</summary>%>
 
         <p>Entomology meets extraterrestrials in BAKER’S DOZEN, a darkly comedic satire about a man who aspires to do the right thing, even if it means letting others down.
         <br><br>
@@ -502,7 +453,7 @@
         The books that inspired my writing are <i>Sirens of Titan</i>, <i>Catch-22</i>, and <i>The Masquerade of the Red Death Trilogy</i>.
         </p>
 
-        </details>
+        <%#</details>%>
     </section>
     <section id="about">
         <hr>
