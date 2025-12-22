@@ -366,6 +366,56 @@
           padding: 1rem 1.25rem;
           border-radius: 4px;
         }
+
+        details {
+          margin: 1rem 0;
+        }
+
+        summary {
+          cursor: pointer;
+          font-size: 2rem;
+          font-weight: 900;
+        }
+
+        summary::marker {
+          color: #555;
+        }
+
+        .book-box {
+          border: 2px solid #ccc;      /* box border */
+          border-radius: 8px;          /* rounded corners */
+          padding: 1rem;               /* spacing inside the box */
+          background-color: #f9f9f9;   /* light gray background */
+          margin: 1rem 0;              /* spacing outside the box */
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* optional shadow */
+          min-height: 100px;
+        }
+
+        .books-nav {
+          display: flex;          /* horizontal layout */
+          gap: 1rem;              /* space between tabs */
+          border-bottom: 2px solid #ccc;
+          padding: 0.5rem 0;
+          background-color: #f9f9f9;
+          position: sticky;       /* optional sticky */
+          top: 0;
+          z-index: 10;
+        }
+
+        .book-tab {
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          border: none;
+          background-color: #e2e8f0;
+          border-radius: 6px 6px 0 0; /* top-rounded tabs */
+          font-weight: bold;
+        }
+
+        .book-tab.active {
+          background-color: #60a5fa;
+          color: white;
+        }
+
     </style>
 </head>
 
@@ -400,7 +450,36 @@
     <section id="books">
         <hr>
         <h2>Books</h2>
+
+        <div class="books-section">
+  <nav class="books-nav">
+    <button class="book-tab active" data-book="dogweed">Dogweed</button>
+    <button class="book-tab" data-book="bakers-dozen">Baker's Dozen</button>
+    <button class="book-tab" data-book="another-book">Another Book</button>
+  </nav>
+
+  <div class="book-content">
+    <div class="book-panel" id="dogweed">
+      <h2>Dogweed</h2>
+      <p>Description goes here.</p>
+    </div>
+
+    <div class="book-panel hidden" id="bakers-dozen">
+      <h2>Baker's Dozen</h2>
+      <p>Description goes here.</p>
+    </div>
+
+    <div class="book-panel hidden" id="another-book">
+      <h2>Another Book</h2>
+      <p>Description goes here.</p>
+    </div>
+  </div>
+</div>
+        <details open class="book-box">
+        <summary><strong>BAKER'S DOZEN</strong>
         <%= image_tag 'BDcoverEli.jpg', class: 'small-image' %>
+        </summary>
+
         <p>Entomology meets extraterrestrials in BAKER’S DOZEN, a darkly comedic satire about a man who aspires to do the right thing, even if it means letting others down.
         <br><br>
         <blockquote>When twelve goo-dripping aliens land in DC and become addicted to muffins, Eugene’s life begins to change in extraordinary ways.
@@ -422,6 +501,8 @@
         The story is told in third person limited from multiple characters' points of view, and although a satire at heart, reads like an espionage thriller.
         The books that inspired my writing are <i>Sirens of Titan</i>, <i>Catch-22</i>, and <i>The Masquerade of the Red Death Trilogy</i>.
         </p>
+
+        </details>
     </section>
     <section id="about">
         <hr>
