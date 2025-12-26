@@ -391,6 +391,12 @@
           min-height: 100px;
         }
 
+        .instagram-icon {
+          max-height: auto;
+          max-width: 32px;
+          width: 5vw;
+          height: auto;
+        }
     </style>
 </head>
 
@@ -477,6 +483,12 @@
           Like most NFL fans, I always root for the Cowboys to lose.
           I also enjoy cooking, spending time with my girlfriend, and petting Hank the Tank (featured at the top of this webpage).
         </p>
+        <%= link_to "https://www.instagram.com/nathantrautenberg/",
+            target: "_blank",
+            rel: "noopener" do %>
+        <%= image_tag "icons/instagram.svg",
+            class: "instagram-icon" %>
+        <% end %>
     </section>
     <section id="contact">
         <hr>
